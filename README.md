@@ -14,6 +14,4 @@ to be uploaded
 For experimentation on what type of NN/ML works best for our data set
 
 ## Credits
-
-</br></br>
 MIT Beaverworks
