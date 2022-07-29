@@ -7,7 +7,7 @@ We decided to implement an edge detection algorithm using the Hadamard gate call
 
 ## Implementation
 
-07/28 - decided on topic and took notes; began implementing some helper functions and finding test images
+07/28 - decided on topic and took [notes](https://docs.google.com/document/d/1KwwHY0z-jrOcwBCqH7Xco5jy1c1H4JHYLDq1byuVJ5E/edit?usp=sharing); began implementing some helper functions and finding test images
 
 07/29 - continued implementation
 
