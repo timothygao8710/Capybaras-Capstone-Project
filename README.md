@@ -11,6 +11,14 @@ We decided to implement an edge detection algorithm using the Hadamard gate call
 
 07/29 - continued implementation
 
+Observed problems:
+
+1. Code has difficulty detecting unclear edges; i.e. when colors are on a gradient. Possible solves: use different threshold values
+
+2. Images that have clear edges with one pixel width of the different color are hard to spot (see small3.png) and the code overlays it on accident
+
+3. Edge detector sometimes has extra pixels in space where there's color and doesn't detect edges when its on vertical ends but does when its on horizontal (see small4.png output).
+
 ## Video
 to be uploaded
 
