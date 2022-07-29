@@ -27,6 +27,11 @@ Goals for Monday:
 ## Video
 to be uploaded
 
+## Future Steps
+- More Evaluation and Benchmarking of QHED performance
+- Testing on Randomly Generated images, comparing performance to classical
+- Zhang, Yi, Kai Lu, and YingHui Gao. "QSobel: a novel quantum image edge extraction algorithm." Science China Information Sciences 58.1 (2015): 1-13. https://link.springer.com/article/10.1007/s11432-014-5158-9
+
 ## Credits
 MIT Beaverworks
 
