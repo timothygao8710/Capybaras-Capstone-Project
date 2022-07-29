@@ -25,6 +25,8 @@ to be uploaded
 ## Credits
 MIT Beaverworks
 
+[Quantum Image Processing](https://journals.aps.org/prx/pdf/10.1103/PhysRevX.7.031041)
+
 [Qiskit Documentation on QHED](https://qiskit.org/textbook/ch-applications/quantum-edge-detection.html)
 
 [8x8 Pixel image creator](https://www.pixilart.com/draw)
