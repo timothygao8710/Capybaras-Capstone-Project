@@ -19,6 +19,11 @@ Observed problems:
 
 3. Edge detector sometimes has extra pixels in space where there's color and doesn't detect edges when its on vertical ends but does when its on horizontal (see small4.png output).
 
+Goals for Monday:
+- Merge most information - sharpening image, large image breakdown
+- split code (such as quantum hardware part) into separate notebooks
+- 
+
 ## Video
 to be uploaded
 
