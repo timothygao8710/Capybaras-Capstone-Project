@@ -22,7 +22,7 @@ Observed problems:
 Goals for Monday:
 - Merge most information - sharpening image, large image breakdown
 - split code (such as quantum hardware part) into separate notebooks
-- 
+- do more stuff
 
 ## Video
 to be uploaded
