@@ -1,3 +1,9 @@
+# To Do #
+- Separate single juypter nb into multiple ---> neater and help avoid merge conflicts
+- We should have at least a separate part for image preprocessing (what we feed into the algo), quantum part, quantum running on cloud notebooks.
+- Could think about adding resource monitoring nb
+- Image gridding nb --> large image to gridded smaller images
+
 # Capybaras-Capstone-Project
 
 ## Thought process
