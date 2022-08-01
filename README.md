@@ -1,3 +1,11 @@
+# To Do #
+- Idea: Perform edge detection on each color dimension
+- Separate single juypter nb into multiple ---> neater and help avoid merge conflicts
+- We should have at least a separate part for image preprocessing (what we feed into the algo), quantum part, quantum running on cloud notebooks.
+- Could think about adding resource monitoring nb
+- Image gridding nb --> large image to gridded smaller images
+- More explanations (add explanations pdf)
+
 # Capybaras-Capstone-Project
 
 ## Thought process
@@ -19,8 +27,19 @@ Observed problems:
 
 3. Edge detector sometimes has extra pixels in space where there's color and doesn't detect edges when its on vertical ends but does when its on horizontal (see small4.png output).
 
+Goals for Monday:
+- Merge most information - sharpening image, large image breakdown
+- split code (such as quantum hardware part) into separate notebooks
+- do more stuff
+
 ## Video
 to be uploaded
+
+## Future Steps
+- More Evaluation and Benchmarking of QHED performance
+- Testing on Randomly Generated images, comparing performance to classical
+- Evaluate performance across different image types (e.g., grayscale?)
+- Zhang, Yi, Kai Lu, and YingHui Gao. "QSobel: a novel quantum image edge extraction algorithm." Science China Information Sciences 58.1 (2015): 1-13. https://link.springer.com/article/10.1007/s11432-014-5158-9
 
 ## Credits
 MIT Beaverworks
