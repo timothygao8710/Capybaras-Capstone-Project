@@ -6,9 +6,10 @@ from matplotlib import style
 import os
 import math
 
-#raw_image: Image as np array
-#name: string name of the image which will be used
-#show: number of gridded images to show, -1 to show all images
+#raw_image: [PIL.PngImagePlugin.PngImageFile] Image as np array
+#name: [string] name of the image which will be used
+#grid_size: [int] desired grid size
+#show: [Int] number of gridded images to show, -1 to show all images
 
 def gridImage(img_raw, name, grid_size = 8, show = -1):    
     #Imports
@@ -70,4 +71,5 @@ def gridImage(img_raw, name, grid_size = 8, show = -1):
         
 if __name__ == "__main__":
     img = Image.open(os.path.join("test_images", "timothycapybara.png"))
+    print(type(img))
     gridImage(img, "timothycapybara")
