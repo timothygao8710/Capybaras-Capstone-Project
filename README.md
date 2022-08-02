@@ -35,6 +35,10 @@ Goals for Monday:
 - split code (such as quantum hardware part) into separate notebooks
 - do more stuff
 
+Weekend - finished algorithms and notes in jupyter notebook, split files up
+
+8/1 - continued implementation, began writing script for video. Worked on bugs in large image detection
+
 ## Video
 to be uploaded
 
