@@ -39,7 +39,7 @@ name = "Sunny_Capybara"
 
 #Path of image to use
 # path = os.path.join("test_images", "timothycapybara.png")
-path = os.path.join("test_images", "smallcroppedskyline.png")
+path = os.path.join("test_images", "squarecapybara.jpg")
 
 #Detection algorithm works with on NxN grids of the original image - limited by # of qubits real quantum computer can sustain
 #N is a power of 2
