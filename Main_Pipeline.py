@@ -35,10 +35,11 @@ filter_image_script = reload(filter_image_script)
 #########################################################################################################################################################
 
 #Name the image
-name = "Pinwheel_AbsoluteC"
+name = "newsettingstest"
 
 #Path of image to use
 path = os.path.join("test_images", "edgeflower.jpeg")
+# path = os.path.join("wildfires", "wildfire3.jpeg")
 # path = os.path.join("brain_tumor", "braintumor4.jpeg")
 
 #Detection algorithm works with on NxN grids of the original image - limited by # of qubits real quantum computer can sustain
@@ -46,13 +47,17 @@ path = os.path.join("test_images", "edgeflower.jpeg")
 N = 32
 
 #Percent edges for relative thresholding
-percent_edges = 0.8
+percent_edges = 0.15
+# percent_edges = 0.7
 
 data_qb = math.ceil(math.log2(N**2))
 anc_qb = 1
 total_qb = data_qb + anc_qb
 
 print(f"This run will require {total_qb} qubits \n")
+
+all_diffs = []
+raw_grids = []
 #########################################################################################################################################################
 
 def plot_image(img, title: str):
@@ -99,6 +104,9 @@ def filter_image(image):
 
 #change backend to IBM backend to run on real quantum computer. Default is simulation
 def edge_detection(grid, back=Aer.get_backend('statevector_simulator')):
+    global all_diffs
+    global raw_grids
+
     n = grid.shape[0]
     m = grid.shape[1]
 
@@ -142,49 +150,76 @@ def edge_detection(grid, back=Aer.get_backend('statevector_simulator')):
     sv_v = results.get_statevector(qc_v)
     
     # Classical postprocessing for plotting the output
-
     # Defining a lambda function for thresholding difference values
-    # thresh = np.sort(np.array([np.abs(sv_h[2*i+1].real) for i in range(N*N)]))[int(N * N * (1 - percent_edges))]
-    # thresh = np.max(np.array([np.abs(sv_h[2*i+1].real) for i in range(N*N)])) * (1 - percent_edges)
-    thresh = 0.06 ** 3
-    print(thresh)
+    all_diffs = np.append(all_diffs, np.array([np.abs(sv_h[2*i+1].real) for i in range(N*N)]))
+    all_diffs = np.append(all_diffs, np.array([np.abs(sv_v[2*i+1].real) for i in range(N*N)]))
+    raw_grids.append((sv_h, sv_v))
 
-    # Defining a lambda function for thresholding difference values
-    threshold = lambda amp: (amp > thresh or amp < -1 * thresh)
+    # # thresh = np.sort(np.array([np.abs(sv_h[2*i+1].real) for i in range(N*N)]))[int(N * N * (1 - percent_edges))]
+    # # thresh = np.max(np.array([np.abs(sv_h[2*i+1].real) for i in range(N*N)])) * (1 - percent_edges)
+    # print(thresh)
 
-    # Selecting odd states from the raw statevector and
-    # reshaping column vector of size 64 to an 8x8 matrix
+    # # Defining a lambda function for thresholding difference values
+    # threshold = lambda amp: (amp > thresh or amp < -1 * thresh)
+
+    # # Selecting odd states from the raw statevector and
+    # # reshaping column vector of size N*N to an NxN matrix
     
-    edge_scan_h = np.abs(np.array([1 if threshold(sv_h[2*i+1].real) else 0 for i in range(N*N)])).reshape(N, N)
-    edge_scan_v = np.abs(np.array([1 if threshold(sv_v[2*i+1].real) else 0 for i in range(N*N)])).reshape(N, N).T
+    # edge_scan_h = np.abs(np.array([1 if threshold(sv_h[2*i+1].real) and (i + 1) % N != 0 else 0 for i in range(N*N)])).reshape(N, N)
+    # edge_scan_v = np.abs(np.array([1 if threshold(sv_v[2*i+1].real) and (i + 1) % N != 0 else 0 for i in range(N*N)])).reshape(N, N).T
 
-    # Plotting the Horizontal and vertical scans
-    # plot_image(edge_scan_h, 'Horizontal scan output')
-    # plot_image(edge_scan_v, 'Vertical scan output')
+    # # Plotting the Horizontal and vertical scans
+    # # plot_image(edge_scan_h, 'Horizontal scan output')
+    # # plot_image(edge_scan_v, 'Vertical scan output')
     
-    # Combining the horizontal and vertical component of the result with bitwise OR
-    edge_scan_sim = edge_scan_h | edge_scan_v
+    # # Combining the horizontal and vertical component of the result with bitwise OR
+    # edge_scan_sim = edge_scan_h | edge_scan_v
 
-    # plot_image(edge_scan_sim, 'Edge Detected image')
-    return edge_scan_sim
+    # # plot_image(edge_scan_sim, 'Edge Detected image')
+    # return edge_scan_sim
 
 #########################################################################################################################################################
 
 img_raw = np.asarray(Image.open(path).convert('L'),dtype=int)
 print(img_raw.shape)
 # img_raw = filter_image(img_raw)
-plot_image(img_raw, name + " Filtered Image")
-tot = int(img_raw.shape[0] * img_raw.shape[1] / N / N)
-all_grids = grid_image_script.grid_image(img_raw, name, grid_size=N, show=3, save_grid_image=False)
+# plot_image(img_raw, name + " Filtered Image")
+image_size = int(img_raw.shape[0] * img_raw.shape[1])
+tot = int(image_size / N / N)
+all_grids = grid_image_script.grid_image(img_raw, name, grid_size=N, show=-2, save_grid_image=False)
+
 for i in range(len(all_grids)):
     # plot_image(all_grids[i], f"{i+1}th Grid for {name}")
     all_grids[i] = all_grids[i].astype(int)
-    cur = edge_detection(all_grids[i])
+    # cur = edge_detection(all_grids[i])
+    edge_detection(all_grids[i])
+    
     print(f"Done {i+1}/{tot}...")
     # plot_image(cur, f"{i+1}th Grid for {name}")
-    all_grids[i] = cur
+    # all_grids[i] = cur
+
+print("Combining grids...")
+
+print(len(all_diffs))
+print(image_size)
+
+thresh = np.sort(np.array([np.abs(all_diffs[2*i+1].real) for i in range(image_size)]))[int(image_size * (1 - percent_edges))]
+print(thresh)
+threshold = lambda amp: (amp > thresh or amp < -1 * thresh)
+
+for i in range(len(all_grids)):
+    sv_h = np.asarray(raw_grids[i][0])
+    sv_v = np.asarray(raw_grids[i][1])
+
+    edge_scan_h = np.abs(np.array([1 if threshold(sv_h[2*i+1].real) and (i + 1) % N != 0 else 0 for i in range(N*N)])).reshape(N, N)
+    edge_scan_v = np.abs(np.array([1 if threshold(sv_v[2*i+1].real) and (i + 1) % N != 0 else 0 for i in range(N*N)])).reshape(N, N).T
+    edge_scan_sim = edge_scan_h | edge_scan_v
+    all_grids[i] = edge_scan_sim
 
 res_image = grid_image_script.combine_grids(all_grids, img_raw.shape, N)
-plot_image(res_image, name + " Final Combined Image")
-save_image(255 - res_image * 255, path = os.path.join("brain_tumor", f"res{100*percent_edges}%{name}.png"))
+# plot_image(res_image, name + " Final Combined Image")
+save_image(255 - res_image * 255, path = os.path.join("result_images", f"res{100*percent_edges}%{name}.png"))
 print("DONE")
+
+
+# thresh = np.max(np.array([np.abs(sv_h[2*i+1].real) for i in range(image_size)])) * (1 - percent_edges)
