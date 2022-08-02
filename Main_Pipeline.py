@@ -21,7 +21,6 @@ import matplotlib.image as mpimg
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import style
-style.use('bmh')
 
 from importlib import reload
 import os
@@ -40,11 +39,11 @@ name = "Sunny_Capybara"
 
 #Path of image to use
 # path = os.path.join("test_images", "timothycapybara.png")
-path = os.path.join("test_images", "test_grey.png")
+path = os.path.join("test_images", "smallcroppedskyline.png")
 
 #Detection algorithm works with on NxN grids of the original image - limited by # of qubits real quantum computer can sustain
 #N is a power of 2
-N = 8
+N = 32
 
 data_qb = math.ceil(math.log2(N**2))
 anc_qb = 1
@@ -63,28 +62,39 @@ def plot_image(img, title: str):
     plt.imshow(img, extent=[0, img.shape[0], img.shape[1], 0], cmap='viridis')
     plt.show()
     
+def save_image(cur_img, path = os.path.join("debug.png")):
+    cur_img = cur_img.astype(np.uint8)
+    cur_img = Image.fromarray(cur_img)
+    if cur_img.mode != 'RGB':
+        cur_img = cur_img.convert('RGB')
+    cur_img.save(path)
+
 #Normalize -- squared amplitudes must sum to 1
 def amplitude_encode(img_data):
     
     # Calculate the RMS value
-    rms = np.sqrt(np.sum(np.sum(img_data**2, axis=1)))
-    
+    rms = np.sqrt(np.sum(img_data**2))
+    check = 0
+
     # Create normalized image
     image_norm = []
     for arr in img_data:
         for ele in arr:
             image_norm.append(ele / rms)
-        
+            check += ele * ele
+
     # Return the normalized image as a numpy array
     return np.array(image_norm)
 
 def filter_image(image):
     print("Filtering image...")
     
-    # image = filter_image_script.enhance_contrast(image)
-    return image[:,:,0] / 255
-    # return image[:,:,1]
-    # return image[:,:,2]
+    image = filter_image_script.enhance_contrast(image)
+    if len(image.shape) == 2:
+        return image
+
+    #Grey-scale
+    return 0.2989 * image[:,:,0] + 0.5870 * image[:,:,1] + 0.1140 * image[:,:,2]
 
 #change backend to IBM backend to run on real quantum computer. Default is simulation
 def edge_detection(grid, back=Aer.get_backend('statevector_simulator')):
@@ -133,12 +143,19 @@ def edge_detection(grid, back=Aer.get_backend('statevector_simulator')):
     # Classical postprocessing for plotting the output
 
     # Defining a lambda function for thresholding difference values
-    threshold = lambda amp: (amp > 1e-15 or amp < -1e-15)
+    percent_edges = 0.1
+    thresh = np.sort(np.array([np.abs(sv_h[2*i+1].real) for i in range(N*N)]))[int(N * N * (1 - percent_edges))]
+    # thresh = np.max(np.array([np.abs(sv_h[2*i+1].real) for i in range(N*N)])) * (1 - percent_edges)
+    print(thresh)
+
+    # Defining a lambda function for thresholding difference values
+    threshold = lambda amp: (amp > thresh or amp < -1 * thresh)
 
     # Selecting odd states from the raw statevector and
     # reshaping column vector of size 64 to an 8x8 matrix
-    edge_scan_h = np.abs(np.array([1 if threshold(sv_h[2*i+1].real) else 0 for i in range(2**data_qb)])).reshape(N, N)
-    edge_scan_v = np.abs(np.array([1 if threshold(sv_v[2*i+1].real) else 0 for i in range(2**data_qb)])).reshape(N, N).T
+    
+    edge_scan_h = np.abs(np.array([1 if threshold(sv_h[2*i+1].real) and (i + 1) % N != 0 else 0 for i in range(N*N)])).reshape(N, N)
+    edge_scan_v = np.abs(np.array([1 if threshold(sv_v[2*i+1].real) and (i + 1) % N != 0 else 0 for i in range(N*N)])).reshape(N, N).T
 
     # Plotting the Horizontal and vertical scans
     # plot_image(edge_scan_h, 'Horizontal scan output')
@@ -152,17 +169,22 @@ def edge_detection(grid, back=Aer.get_backend('statevector_simulator')):
 
 #########################################################################################################################################################
 
-img_raw = np.asarray(Image.open(path))
+img_raw = np.asarray(Image.open(path).convert('L'),dtype=int)
+print(img_raw.shape)
 plot_image(img_raw, name + " Input Image")
-img_raw = filter_image(img_raw)
-plot_image(img_raw, name + " Filtered Image")
+# img_raw = filter_image(img_raw)
+# plot_image(img_raw, name + " Filtered Image")
 
 all_grids = grid_image_script.grid_image(img_raw, name, grid_size=N, show=3, save_grid_image=False)
 for i in range(len(all_grids)):
+    # plot_image(all_grids[i], f"{i+1}th Grid for {name}")
+    all_grids[i] = all_grids[i].astype(int)
     cur = edge_detection(all_grids[i])
     print(f"{i+1}th Grid Done")
-    plot_image(cur, f"{i+1}th Grid for {name}")
+    # plot_image(cur, f"{i+1}th Grid for {name}")
     all_grids[i] = cur
 
 res_image = grid_image_script.combine_grids(all_grids, img_raw.shape, N)
 plot_image(res_image, name + " Final Combined Image")
+save_image(res_image, path = "skyline10%.png")
+print("DONE")
