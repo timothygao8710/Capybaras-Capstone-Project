@@ -35,15 +35,18 @@ filter_image_script = reload(filter_image_script)
 #########################################################################################################################################################
 
 #Name the image
-name = "Sunny_Capybara"
+name = "Pinwheel_AbsoluteC"
 
 #Path of image to use
-# path = os.path.join("test_images", "timothycapybara.png")
-path = os.path.join("test_images", "smallcroppedskyline.png")
+path = os.path.join("test_images", "edgeflower.jpeg")
+# path = os.path.join("brain_tumor", "braintumor4.jpeg")
 
 #Detection algorithm works with on NxN grids of the original image - limited by # of qubits real quantum computer can sustain
 #N is a power of 2
 N = 32
+
+#Percent edges for relative thresholding
+percent_edges = 0.8
 
 data_qb = math.ceil(math.log2(N**2))
 anc_qb = 1
@@ -59,7 +62,7 @@ def plot_image(img, title: str):
         plt.xticks(range(img.shape[0]))
         plt.yticks(range(img.shape[1]))
     
-    plt.imshow(img, extent=[0, img.shape[0], img.shape[1], 0], cmap='viridis')
+    plt.imshow(img, extent=[0, img.shape[0], img.shape[1], 0])
     plt.show()
     
 def save_image(cur_img, path = os.path.join("debug.png")):
@@ -74,14 +77,12 @@ def amplitude_encode(img_data):
     
     # Calculate the RMS value
     rms = np.sqrt(np.sum(img_data**2))
-    check = 0
 
     # Create normalized image
     image_norm = []
     for arr in img_data:
         for ele in arr:
             image_norm.append(ele / rms)
-            check += ele * ele
 
     # Return the normalized image as a numpy array
     return np.array(image_norm)
@@ -143,9 +144,9 @@ def edge_detection(grid, back=Aer.get_backend('statevector_simulator')):
     # Classical postprocessing for plotting the output
 
     # Defining a lambda function for thresholding difference values
-    percent_edges = 0.1
-    thresh = np.sort(np.array([np.abs(sv_h[2*i+1].real) for i in range(N*N)]))[int(N * N * (1 - percent_edges))]
+    # thresh = np.sort(np.array([np.abs(sv_h[2*i+1].real) for i in range(N*N)]))[int(N * N * (1 - percent_edges))]
     # thresh = np.max(np.array([np.abs(sv_h[2*i+1].real) for i in range(N*N)])) * (1 - percent_edges)
+    thresh = 0.06 ** 3
     print(thresh)
 
     # Defining a lambda function for thresholding difference values
@@ -154,8 +155,8 @@ def edge_detection(grid, back=Aer.get_backend('statevector_simulator')):
     # Selecting odd states from the raw statevector and
     # reshaping column vector of size 64 to an 8x8 matrix
     
-    edge_scan_h = np.abs(np.array([1 if threshold(sv_h[2*i+1].real) and (i + 1) % N != 0 else 0 for i in range(N*N)])).reshape(N, N)
-    edge_scan_v = np.abs(np.array([1 if threshold(sv_v[2*i+1].real) and (i + 1) % N != 0 else 0 for i in range(N*N)])).reshape(N, N).T
+    edge_scan_h = np.abs(np.array([1 if threshold(sv_h[2*i+1].real) else 0 for i in range(N*N)])).reshape(N, N)
+    edge_scan_v = np.abs(np.array([1 if threshold(sv_v[2*i+1].real) else 0 for i in range(N*N)])).reshape(N, N).T
 
     # Plotting the Horizontal and vertical scans
     # plot_image(edge_scan_h, 'Horizontal scan output')
@@ -171,20 +172,19 @@ def edge_detection(grid, back=Aer.get_backend('statevector_simulator')):
 
 img_raw = np.asarray(Image.open(path).convert('L'),dtype=int)
 print(img_raw.shape)
-plot_image(img_raw, name + " Input Image")
 # img_raw = filter_image(img_raw)
-# plot_image(img_raw, name + " Filtered Image")
-
+plot_image(img_raw, name + " Filtered Image")
+tot = int(img_raw.shape[0] * img_raw.shape[1] / N / N)
 all_grids = grid_image_script.grid_image(img_raw, name, grid_size=N, show=3, save_grid_image=False)
 for i in range(len(all_grids)):
     # plot_image(all_grids[i], f"{i+1}th Grid for {name}")
     all_grids[i] = all_grids[i].astype(int)
     cur = edge_detection(all_grids[i])
-    print(f"{i+1}th Grid Done")
+    print(f"Done {i+1}/{tot}...")
     # plot_image(cur, f"{i+1}th Grid for {name}")
     all_grids[i] = cur
 
 res_image = grid_image_script.combine_grids(all_grids, img_raw.shape, N)
 plot_image(res_image, name + " Final Combined Image")
-save_image(res_image, path = "skyline10%.png")
+save_image(255 - res_image * 255, path = os.path.join("brain_tumor", f"res{100*percent_edges}%{name}.png"))
 print("DONE")
