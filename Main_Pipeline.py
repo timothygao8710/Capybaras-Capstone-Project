@@ -44,7 +44,7 @@ path = os.path.join("test_images", "edgeflower.jpeg")
 
 #Detection algorithm works with on NxN grids of the original image - limited by # of qubits real quantum computer can sustain
 #N is a power of 2
-N = 32
+N = 8
 
 #Percent edges for relative thresholding
 percent_edges = 0.15
