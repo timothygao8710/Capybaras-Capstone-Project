@@ -38,7 +38,7 @@ filter_image_script = reload(filter_image_script)
 name = "Richard"
 
 #Path of image to use
-path = os.path.join("test_images", "richard.jpeg")
+path = os.path.join("fun", "richard.jpeg")
 # path = os.path.join("test_images", "edgeflower.jpeg")
 # path = os.path.join("wildfires", "wildfire3.jpeg")
 # path = os.path.join("brain_tumor", "braintumor4.jpeg")
