@@ -35,20 +35,20 @@ filter_image_script = reload(filter_image_script)
 #########################################################################################################################################################
 
 #Name the image
-name = "Richard"
+name = "Cass"
 
 #Path of image to use
-path = os.path.join("fun", "richard.jpeg")
+path = os.path.join("fun", "TimothyCapybara.png")
 # path = os.path.join("test_images", "edgeflower.jpeg")
 # path = os.path.join("wildfires", "wildfire3.jpeg")
 # path = os.path.join("brain_tumor", "braintumor4.jpeg")
 
 #Detection algorithm works with on NxN grids of the original image - limited by # of qubits real quantum computer can sustain
 #N is a power of 2
-N = 32
+N = 16
 
 #Percent edges for relative thresholding
-percent_edges = 0.2
+percent_edges = 0.1
 # percent_edges = 0.7
 
 data_qb = math.ceil(math.log2(N**2))
