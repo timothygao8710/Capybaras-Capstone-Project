@@ -47,7 +47,7 @@ path = os.path.join("images", "test_images", "beaverworks_logo.png")
 N = 16
 
 #Percent edges for relative thresholding
-percent_edges = 0.15
+percent_edges = 0.2
 # percent_edges = 0.7
 
 data_qb = math.ceil(math.log2(N**2))
