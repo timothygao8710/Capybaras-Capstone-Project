@@ -35,20 +35,18 @@ filter_image_script = reload(filter_image_script)
 #########################################################################################################################################################
 
 #Name the image
-name = "BeaverWorksLogo"
+name = "Test_satellite2"
 
-#Path of image to use
-# path = os.path.join("fun", "NoahCapybara.png")
-path = os.path.join("images", "test_images", "beaverworks_logo.png")
-# path = os.path.join("brain_tumor", "braintumor4.jpeg")
+# Path of image to use
+path = os.path.join("images", "test_images", "satellite2.jpg")
 
 #Detection algorithm works with on NxN grids of the original image - limited by # of qubits real quantum computer can sustain
 #N is a power of 2
 N = 16
 
 #Percent edges for relative thresholding
-percent_edges = 0.2
 # percent_edges = 0.7
+percent_edges = 0.1
 
 data_qb = math.ceil(math.log2(N**2))
 anc_qb = 1
@@ -202,11 +200,11 @@ for i in range(len(all_grids)):
 
 print("Combining grids...")
 
-print(len(all_diffs))
-print(image_size)
+print(f"length of all differences is: {len(all_diffs)}")
+print(f"Image size is: {image_size}")
 
 thresh = np.sort(np.array([np.abs(all_diffs[2*i+1].real) for i in range(image_size)]))[int(image_size * (1 - percent_edges))]
-print(thresh)
+print(f"threshold is: {thresh}")
 threshold = lambda amp: (amp > thresh or amp < -1 * thresh)
 
 for i in range(len(all_grids)):
