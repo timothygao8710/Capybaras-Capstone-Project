@@ -35,10 +35,12 @@ filter_image_script = reload(filter_image_script)
 #########################################################################################################################################################
 
 #Name the image
-name = "Test_satellite2"
+name = "LowResWomenPortrait"
 
-# Path of image to use
-path = os.path.join("images", "test_images", "satellite2.jpg")
+#Path of image to use
+# path = os.path.join("fun", "NoahCapybara.png")
+path = os.path.join("test_images", "LowResWomenPortrait.jpeg")
+# path = os.path.join("brain_tumor", "braintumor4.jpeg")
 
 #Detection algorithm works with on NxN grids of the original image - limited by # of qubits real quantum computer can sustain
 #N is a power of 2
