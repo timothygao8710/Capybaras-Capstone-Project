@@ -35,7 +35,7 @@ filter_image_script = reload(filter_image_script)
 #########################################################################################################################################################
 
 #Name the image
-name = "Mona Lisa"
+name = "BeaverWorksLogo"
 
 #Path of image to use
 # path = os.path.join("fun", "NoahCapybara.png")
@@ -47,7 +47,7 @@ path = os.path.join("test_images", "beaverworks_logo.png")
 N = 16
 
 #Percent edges for relative thresholding
-percent_edges = 0.4
+percent_edges = 0.15
 # percent_edges = 0.7
 
 data_qb = math.ceil(math.log2(N**2))
@@ -79,15 +79,17 @@ def save_image(cur_img, path = os.path.join("debug.png")):
 
 #Normalize -- squared amplitudes must sum to 1
 def amplitude_encode(img_data):
-    
     # Calculate the RMS value
     rms = np.sqrt(np.sum(img_data**2))
-
+    #Edge case: All zeroes
+    if rms == 0:
+        rms = np.sqrt(N * N * 1e-30)
+    
     # Create normalized image
     image_norm = []
     for arr in img_data:
         for ele in arr:
-            image_norm.append(ele / rms)
+            image_norm.append(max(ele, 1e-15) / rms)
 
     # Return the normalized image as a numpy array
     return np.array(image_norm)
