@@ -26,8 +26,8 @@ from importlib import reload
 import os
 import math
 
-import grid_image_script
-import filter_image_script
+import assets.grid_image_script as grid_image_script
+import assets.filter_image_script as filter_image_script
 
 grid_image_script = reload(grid_image_script)
 filter_image_script = reload(filter_image_script)
