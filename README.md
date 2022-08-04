@@ -2,7 +2,9 @@
 
 Hello 👋! We are the Capybaras, from MIT BWSI.
 
-INSERT VIDEO HERE
+**INSERT VIDEO HERE**
+
+[Slides](https://docs.google.com/presentation/d/1h0SkbEiLvZD52KO8aTaIzguUdenkKmDMlsFrbe9X76Q/edit?usp=sharing)
 
 ## Thought process
 There were some difficulties in choosing our topic. We initially wanted to do Quantum matrix multiplication optimization, but there was a lack of reliable information, so we decided to switch gears.
@@ -22,11 +24,6 @@ Observed problems:
 2. Images that have clear edges with one pixel width of the different color are hard to spot (see small3.png) and the code overlays it on accident
 
 3. Edge detector sometimes has extra pixels in space where there's color and doesn't detect edges when its on vertical ends but does when its on horizontal (see small4.png output).
-
-Goals for Monday:
-- Merge most information - sharpening image, large image breakdown
-- split code (such as quantum hardware part) into separate notebooks
-- do more stuff
 
 Weekend - finished algorithms and notes in jupyter notebook, split files up. Wrote initial code for Image Gridding, improved code for Main.ipynb.
 
