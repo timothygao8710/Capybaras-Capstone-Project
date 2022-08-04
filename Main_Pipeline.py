@@ -39,7 +39,7 @@ name = "BeaverWorksLogo"
 
 #Path of image to use
 # path = os.path.join("fun", "NoahCapybara.png")
-path = os.path.join("test_images", "beaverworks_logo.png")
+path = os.path.join("test_images", "WomenPortrait.jpeg")
 # path = os.path.join("brain_tumor", "braintumor4.jpeg")
 
 #Detection algorithm works with on NxN grids of the original image - limited by # of qubits real quantum computer can sustain
@@ -47,7 +47,7 @@ path = os.path.join("test_images", "beaverworks_logo.png")
 N = 16
 
 #Percent edges for relative thresholding
-percent_edges = 0.15
+percent_edges = 0.2
 # percent_edges = 0.7
 
 data_qb = math.ceil(math.log2(N**2))
