@@ -39,7 +39,7 @@ name = "BeaverWorksLogo"
 
 #Path of image to use
 # path = os.path.join("fun", "NoahCapybara.png")
-path = os.path.join("test_images", "WomenPortrait.jpeg")
+path = os.path.join("images", "test_images", "beaverworks_logo.png")
 # path = os.path.join("brain_tumor", "braintumor4.jpeg")
 
 #Detection algorithm works with on NxN grids of the original image - limited by # of qubits real quantum computer can sustain
@@ -220,7 +220,7 @@ for i in range(len(all_grids)):
 
 res_image = grid_image_script.combine_grids(all_grids, img_raw.shape, N)
 # plot_image(res_image, name + " Final Combined Image")
-save_image(255 - res_image * 255, path = os.path.join("result_images", f"res{100*percent_edges}%{name}.png"))
+save_image(255 - res_image * 255, path = os.path.join("images", "result_images", f"res{100*percent_edges}%{name}.png"))
 print("DONE")
 
 

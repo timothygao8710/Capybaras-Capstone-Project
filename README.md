@@ -39,6 +39,8 @@ Weekend - finished algorithms and notes in jupyter notebook, split files up
 
 8/1 - continued implementation, began writing script for video. Worked on bugs in large image detection
 
+8/2 - 
+
 ## Video
 to be uploaded
 
