@@ -11,9 +11,11 @@ There were some difficulties in choosing our topic. We initially wanted to do Qu
 
 We decided to implement an edge detection algorithm using the Hadamard gate called QHED (Quantum Hadamard Edge Detection). Our implementation also included QPIE (Quantum Probability Image Encoding) as image preprocessing.  
 
-## Implementation
+## Project Timeline
 
-07/28 - literature review, decided on topic and took [notes](https://docs.google.com/document/d/1KwwHY0z-jrOcwBCqH7Xco5jy1c1H4JHYLDq1byuVJ5E/edit?usp=sharing); began implementing some helper functions and finding test images
+07/27 - Literature review, decided on topic Quantum Edge Detection
+
+07/28 - More Literature Review, taking [notes](https://docs.google.com/document/d/1KwwHY0z-jrOcwBCqH7Xco5jy1c1H4JHYLDq1byuVJ5E/edit?usp=sharing); began implementing some helper functions and finding test images
 
 07/29 - implementation, implementation, implementation. Got main algorithm to run without bugs, but fails on many images. Implementing helped us understanding the algorithm fully, and we wrote down explanations for QPIE and QHED in markdown cells.
 
@@ -35,6 +37,8 @@ Weekend - finished algorithms and notes in jupyter notebook, split files up. Wro
 
 8/4 - Handling some edge cases, running on more images for results. Finalizing paper, slides, script, recording video.
 
+8/5 - Presented our work to over , including the BWSI program
+
 ## Future Steps
 - Further Evaluation and Benchmarking of QHED performance
 - More testing on many for improved robustness (Could use [Google Imagen](https://imagen.research.google/))
@@ -47,15 +51,20 @@ Weekend - finished algorithms and notes in jupyter notebook, split files up. Wro
 2. Add image to test_images folder
 3. Open Main_Pipeline.py, change path and other settings as desired
 4. Run the script
-5. Look in result_images, celebrate
+5. The result should be in the folder result_images
 
 ## Credits
-MIT Beaverworks
 
-[Quantum Image Processing](https://journals.aps.org/prx/pdf/10.1103/PhysRevX.7.031041)
+Thank you to our incredible teachers Richard Preston and Joe Clapis (who also developed [the curriculum](https://stem.mitre.org/quantum/index.html)) and our TAs Nikita Borisov, Diptanshu Sikdar, Melvin Lin, Dylan VanAllen, and Jon Christie.
 
-[Qiskit Documentation on QHED](https://qiskit.org/textbook/ch-applications/quantum-edge-detection.html)
+Thank you to MIT and Lincoln Labs for providing us with the opportunity to participate in the [BWSI Beaverworks Summer Institute](https://beaverworks.ll.mit.edu/CMS/bw/bwsi_quantum_software).
 
-[8x8 Pixel image creator](https://www.pixilart.com/draw)
+![BWSI Logo](https://beaverworks.ll.mit.edu/CMS/bw/sites/all/themes/professional_theme/logo.png)
 
-[Cityscapes dataset](https://www.cityscapes-dataset.com/)
+## Sources
+- [Quantum Image Processing and Its Application to Edge Detection: Theory and Experiment](https://journals.aps.org/prx/pdf/10.1103/PhysRevX.7.031041)
+- [Quantum Hadamard Edge Detection Algorithm](https://arxiv.org/pdf/2012.11036.pdf)
+- [Pixel Image Drawing Tool](https://www.pixilart.com/draw)
+- [Qiskit Documentation](https://qiskit.org/textbook/ch-applications/quantum-edge-detection.html)
+- [Cityscapes Dataset](https://www.cityscapes-dataset.com/)
+- [Google Images](https://images.google.com/)
