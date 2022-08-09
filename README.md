@@ -33,9 +33,9 @@ Weekend - finished algorithms and notes in jupyter notebook, split files up. Wro
 
 8/3 - Finished Main_Pipeline.py, running it on a bunch of different images, got some very exciting results. Working on paper. More Debugging. Working on slides and script.
 
-8/4 - Handling some edge cases, running on more images for results. Finalizing paper, slides, script, recording video.
+8/4 & Weekend - Handling some edge cases, running on more images for results. Finalizing paper, slides, script, recording video.
 
-8/5 - Presented our work to over , including the BWSI program
+8/7 - Presented our work to over , including the BWSI program
 
 ## Future Steps
 - Further Evaluation and Benchmarking of QHED performance
