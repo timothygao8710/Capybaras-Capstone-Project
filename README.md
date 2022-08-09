@@ -1,4 +1,5 @@
 # Capybaras-Capstone-Project
+<sub> Timothy Gao, Tina Wang, Cassiel Graullera, Noah Cooney
 
 Hello 👋! We are the Capybaras, from MIT BWSI.
 
@@ -6,14 +7,11 @@ Hello 👋! We are the Capybaras, from MIT BWSI.
 
 [Slides](https://docs.google.com/presentation/d/1h0SkbEiLvZD52KO8aTaIzguUdenkKmDMlsFrbe9X76Q/edit?usp=sharing)
 
-## Thought process
-There were some difficulties in choosing our topic. We initially wanted to do Quantum matrix multiplication optimization, but there was a lack of reliable information, so we decided to switch gears.
-
 We decided to implement an edge detection algorithm using the Hadamard gate called QHED (Quantum Hadamard Edge Detection). Our implementation also included QPIE (Quantum Probability Image Encoding) as image preprocessing.  
 
 ## Project Timeline
 
-07/27 - Literature review, decided on topic Quantum Edge Detection
+07/27 - Literature review, searching for topic. We initially decided on Quantum matrix multiplication optimization (and use it to speed-up finding the Nth k-fibonacci number), but we quickly realized that there was a lack of reliable information, so we decided to switch gears, and landed on Quantum Edge Detection.
 
 07/28 - More Literature Review, taking [notes](https://docs.google.com/document/d/1KwwHY0z-jrOcwBCqH7Xco5jy1c1H4JHYLDq1byuVJ5E/edit?usp=sharing); began implementing some helper functions and finding test images
 
