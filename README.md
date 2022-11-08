@@ -1,11 +1,13 @@
+![BWSI Results]([https://beaverworks.ll.mit.edu/CMS/bw/sites/all/themes/professional_theme/logo.png](https://github.com/timothygao8710/Capybaras-Capstone-Project/blob/main/BWSIResults.gif))
+
 # Capybaras-Capstone-Project
 <sub> Timothy Gao, Tina Wang, Cassiel Graullera, Noah Cooney
 
 Hello 👋! We are the Capybaras, from MIT BWSI.
 
-**INSERT VIDEO HERE**
+[Video Link](https://www.youtube.com/watch?v=93m1npEH2nw)
 
-[Slides](https://docs.google.com/presentation/d/1h0SkbEiLvZD52KO8aTaIzguUdenkKmDMlsFrbe9X76Q/edit?usp=sharing)
+[Slides Link](https://docs.google.com/presentation/d/1h0SkbEiLvZD52KO8aTaIzguUdenkKmDMlsFrbe9X76Q/edit?usp=sharing)
 
 We decided to implement an edge detection algorithm using the Hadamard gate called QHED (Quantum Hadamard Edge Detection). Our implementation also included QPIE (Quantum Probability Image Encoding) as image preprocessing.  
 
