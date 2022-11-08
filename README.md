@@ -1,4 +1,4 @@
-![BWSI Results]([https://beaverworks.ll.mit.edu/CMS/bw/sites/all/themes/professional_theme/logo.png](https://github.com/timothygao8710/Capybaras-Capstone-Project/blob/main/BWSIResults.gif))
+![BWSI Results](https://github.com/timothygao8710/Capybaras-Capstone-Project/blob/main/BWSIResults.gif)
 
 # Capybaras-Capstone-Project
 <sub> Timothy Gao, Tina Wang, Cassiel Graullera, Noah Cooney
